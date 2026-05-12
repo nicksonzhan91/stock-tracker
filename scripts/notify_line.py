@@ -18,7 +18,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 DATA_FILE     = os.path.join(os.path.dirname(__file__), "..", "data", "latest.json")
 DASHBOARD_URL = os.environ.get(
     "DASHBOARD_URL",
-    "file:///D:/ClaudeCode%E5%B7%A5%E4%BD%9C%E5%8D%80/stock-tracker/web/index.html"
+    "https://nicksonzhan91.github.io/stock-tracker/web/index.html"
 )
 
 

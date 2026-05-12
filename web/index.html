@@ -114,14 +114,6 @@
         <tr><td>台股成交量（億）</td><td id="taiex-vol">—</td></tr>
         <tr><td>大台成交量（萬口）</td><td id="txf-vol">—</td></tr>
         <tr class="spacer"><td colspan="2"></td></tr>
-        <tr><td><span class="resistance" id="resistance-label">壓力</span></td><td id="resistance-val">—</td></tr>
-        <tr><td>現值</td><td id="taiex-close">—</td></tr>
-        <tr class="spacer"><td colspan="2"></td></tr>
-        <tr><td><span class="support" id="support-label">支撐</span></td><td id="support-val">—</td></tr>
-        <tr class="spacer"><td colspan="2"></td></tr>
-        <tr><td>攻擊線</td><td id="ema11">—</td></tr>
-        <tr><td>生命線</td><td id="ema24">—</td></tr>
-        <tr><td>季線</td><td id="sma60">—</td></tr>
       </tbody>
     </table>
     <div class="tag" style="margin-top:8px;" id="taiex-updated"></div>
@@ -222,20 +214,36 @@ async function loadData() {
 
   // 台股區間
   const tx = data.taiex || {};
-  document.getElementById("taiex-vol").textContent   = tx.volume_yi   != null ? fmt(tx.volume_yi, 0)   : "—";
-  document.getElementById("txf-vol").textContent     = tx.txf_vol_wan != null ? fmt(tx.txf_vol_wan, 2) : "—";
-  document.getElementById("taiex-close").textContent = tx.close       != null ? fmt(tx.close, 2)        : "—";
-  document.getElementById("ema11").textContent       = tx.ema11       != null ? tx.ema11 : "—";
-  document.getElementById("ema24").textContent       = tx.ema24       != null ? tx.ema24 : "—";
-  document.getElementById("sma60").textContent       = tx.sma60       != null ? tx.sma60 : "—";
+  const strikes = data.options_strikes || {};
+  document.getElementById("taiex-vol").textContent = tx.volume_yi   != null ? fmt(tx.volume_yi, 0)   : "—";
+  document.getElementById("txf-vol").textContent   = tx.txf_vol_wan != null ? fmt(tx.txf_vol_wan, 2) : "—";
   if (data.indicators_updated) {
     document.getElementById("taiex-updated").textContent = "更新：" + data.indicators_updated;
   }
 
-  // 壓力/支撐
-  const strikes = data.options_strikes || {};
-  document.getElementById("resistance-val").textContent = strikes.resistance != null ? strikes.resistance : "—";
-  document.getElementById("support-val").textContent    = strikes.support    != null ? strikes.support    : "—";
+  // 價格項目依數值高至低排列
+  const priceItems = [
+    { labelHtml: '<span class="resistance">壓力</span>', value: strikes.resistance, decimals: 0 },
+    { labelHtml: '現值',   value: tx.close, decimals: 2 },
+    { labelHtml: '<span class="support">支撐</span>',    value: strikes.support,    decimals: 0 },
+    { labelHtml: '攻擊線', value: tx.ema11, decimals: 0 },
+    { labelHtml: '生命線', value: tx.ema24, decimals: 0 },
+    { labelHtml: '季線',   value: tx.sma60, decimals: 0 },
+  ];
+  priceItems.sort((a, b) => {
+    if (a.value == null && b.value == null) return 0;
+    if (a.value == null) return 1;
+    if (b.value == null) return -1;
+    return b.value - a.value;
+  });
+  const taiexBody = document.getElementById("taiex-body");
+  taiexBody.querySelectorAll(".dyn-row").forEach(r => r.remove());
+  priceItems.forEach(item => {
+    const tr = document.createElement("tr");
+    tr.className = "dyn-row";
+    tr.innerHTML = `<td>${item.labelHtml}</td><td>${item.value != null ? fmt(item.value, item.decimals) : "—"}</td>`;
+    taiexBody.appendChild(tr);
+  });
 
   // P/C 比圖表
   const pc      = data.pc_ratio || {};

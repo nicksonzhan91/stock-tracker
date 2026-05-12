@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>台股市場儀表板</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Segoe UI", "Microsoft JhengHei", sans-serif; background: #1a1a2e; color: #e0e0e0; font-size: 14px; }
+
+  header { background: #16213e; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #0f3460; }
+  header h1 { font-size: 1.2rem; color: #e8b86d; letter-spacing: 2px; }
+  header .date { color: #aaa; font-size: 0.9rem; }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 14px; padding: 14px; }
+  .card { background: #16213e; border-radius: 8px; padding: 14px; border: 1px solid #0f3460; }
+  .card h2 { font-size: 0.85rem; color: #8ec5fc; margin-bottom: 10px; letter-spacing: 1px; border-bottom: 1px solid #0f3460; padding-bottom: 6px; }
+
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 6px 8px; text-align: right; }
+  th { color: #8ec5fc; font-weight: normal; font-size: 0.8rem; }
+  td:first-child, th:first-child { text-align: left; }
+  tr:hover { background: rgba(255,255,255,0.04); }
+
+  .positive { color: #ff6b6b; font-weight: bold; }
+  .negative { color: #51cf66; font-weight: bold; }
+  .neutral  { color: #e0e0e0; }
+
+  .opt-positive { background: #c0392b; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; }
+  .opt-negative { background: #27ae60; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; }
+  .opt-none     { color: #888; font-size: 0.8rem; }
+
+  .resistance { background: #f1c40f; color: #1a1a2e; font-weight: bold; padding: 2px 6px; border-radius: 4px; }
+  .support    { background: #f1c40f; color: #1a1a2e; font-weight: bold; padding: 2px 6px; border-radius: 4px; }
+
+  .pc-bull { background: rgba(192,57,43,0.2); border-radius: 6px; }
+  .pc-bear { background: rgba(39,174,96,0.2); border-radius: 6px; }
+
+  .spacer td { height: 8px; }
+
+  .full-width { grid-column: 1 / -1; }
+
+  .right-col { grid-row: 1 / 3; }
+
+  .tag { font-size: 0.75rem; color: #aaa; }
+
+  @media (max-width: 700px) {
+    .grid { grid-template-columns: 1fr; }
+    .right-col { grid-row: auto; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📊 台股市場儀表板</h1>
+  <span class="date" id="header-date">—</span>
+</header>
+
+<div class="grid">
+
+  <!-- 左上：法人動態 -->
+  <div class="card" id="card-institutional">
+    <h2>法人動態</h2>
+    <table id="table-institutional">
+      <thead>
+        <tr>
+          <th>項目</th>
+          <th>外資及陸資</th>
+          <th>投信</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>現股買賣差額（億）</td>
+          <td id="f-stock">—</td>
+          <td id="t-stock">—</td>
+        </tr>
+        <tr>
+          <td>大台多空淨額（口）</td>
+          <td id="f-net">—</td>
+          <td id="t-net">—</td>
+        </tr>
+        <tr>
+          <td>大台未平倉（口）</td>
+          <td id="f-oi">—</td>
+          <td id="t-oi">—</td>
+        </tr>
+        <tr>
+          <td>選擇權多空契約金額</td>
+          <td id="f-opt">—</td>
+          <td id="t-opt">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 右欄：台股區間（span 2 rows） -->
+  <div class="card right-col" id="card-taiex">
+    <h2>台股區間</h2>
+    <table id="table-taiex">
+      <thead>
+        <tr><th>項目</th><th>數值</th></tr>
+      </thead>
+      <tbody id="taiex-body">
+        <tr><td>台股成交量（億）</td><td id="taiex-vol">—</td></tr>
+        <tr><td>大台成交量（萬口）</td><td id="txf-vol">—</td></tr>
+        <tr class="spacer"><td colspan="2"></td></tr>
+        <tr><td><span class="resistance" id="resistance-label">壓力</span></td><td id="resistance-val">—</td></tr>
+        <tr><td>加權指數收盤</td><td id="taiex-close">—</td></tr>
+        <tr class="spacer"><td colspan="2"></td></tr>
+        <tr><td>攻擊線 EMA11</td><td id="ema11">—</td></tr>
+        <tr><td>生命線 EMA24</td><td id="ema24">—</td></tr>
+        <tr><td>季線 SMA60</td><td id="sma60">—</td></tr>
+        <tr class="spacer"><td colspan="2"></td></tr>
+        <tr><td><span class="support" id="support-label">支撐</span></td><td id="support-val">—</td></tr>
+      </tbody>
+    </table>
+    <div class="tag" style="margin-top:8px;" id="taiex-updated"></div>
+  </div>
+
+  <!-- 左下：P/C 比 -->
+  <div class="card" id="card-pc">
+    <h2>動能指標 — P/C 比（Put/Call 未平倉量比率）</h2>
+    <table id="table-pc">
+      <thead>
+        <tr>
+          <th>指標</th>
+          <th>數值</th>
+        </tr>
+      </thead>
+      <tbody id="pc-body">
+        <tr><td>現值</td><td id="pc-current">—</td></tr>
+        <tr><td>3MA</td><td id="pc-3ma">—</td></tr>
+        <tr><td>10MA</td><td id="pc-10ma">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 底部全寬：美日韓指數 -->
+  <div class="card full-width" id="card-global">
+    <h2>美日韓指數</h2>
+    <table id="table-global">
+      <thead>
+        <tr>
+          <th>指數</th>
+          <th>收盤</th>
+          <th>增減點</th>
+          <th>增減%</th>
+        </tr>
+      </thead>
+      <tbody id="global-body"></tbody>
+    </table>
+    <div class="tag" style="margin-top:8px;" id="global-updated"></div>
+  </div>
+
+</div>
+
+<script>
+const DATA_PATH = "../data/latest.json";
+
+function fmt(v, decimals = 2) {
+  if (v === null || v === undefined) return "—";
+  return Number(v).toLocaleString("zh-TW", { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+}
+
+function signClass(v) {
+  if (v === null || v === undefined) return "neutral";
+  return v > 0 ? "positive" : v < 0 ? "negative" : "neutral";
+}
+
+function setCell(id, value, decimals = 1) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (value === null || value === undefined) { el.textContent = "—"; el.className = "neutral"; return; }
+  el.textContent = (value > 0 ? "+" : "") + fmt(value, decimals);
+  el.className = signClass(value);
+}
+
+function setOptSign(id, sign) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (sign === "positive") {
+    el.innerHTML = '<span class="opt-positive">多</span>';
+  } else if (sign === "negative") {
+    el.innerHTML = '<span class="opt-negative">空</span>';
+  } else {
+    el.innerHTML = '<span class="opt-none">—</span>';
+  }
+}
+
+async function loadData() {
+  let data;
+  try {
+    const resp = await fetch(DATA_PATH + "?t=" + Date.now());
+    data = await resp.json();
+  } catch(e) {
+    console.error("無法載入資料:", e);
+    return;
+  }
+
+  // 日期
+  document.getElementById("header-date").textContent = data.date || "—";
+
+  // 法人動態
+  const inst = data.institutional || {};
+  const f = inst.foreign || {};
+  const t = inst.trust || {};
+  setCell("f-stock", f.stock_net_yi);
+  setCell("t-stock", t.stock_net_yi);
+  setCell("f-net",  f.futures_net_lot, 0);
+  setCell("t-net",  t.futures_net_lot, 0);
+  setCell("f-oi",   f.futures_oi_lot,  0);
+  setCell("t-oi",   t.futures_oi_lot,  0);
+  setOptSign("f-opt", f.options_sign);
+  setOptSign("t-opt", t.options_sign);
+
+  // 台股區間
+  const tx = data.taiex || {};
+  document.getElementById("taiex-vol").textContent   = tx.volume_yi   != null ? fmt(tx.volume_yi, 0)   : "—";
+  document.getElementById("txf-vol").textContent     = tx.txf_vol_wan != null ? fmt(tx.txf_vol_wan, 2) : "—";
+  document.getElementById("taiex-close").textContent = tx.close       != null ? fmt(tx.close, 2)        : "—";
+  document.getElementById("ema11").textContent       = tx.ema11       != null ? tx.ema11 : "—";
+  document.getElementById("ema24").textContent       = tx.ema24       != null ? tx.ema24 : "—";
+  document.getElementById("sma60").textContent       = tx.sma60       != null ? tx.sma60 : "—";
+  if (data.indicators_updated) {
+    document.getElementById("taiex-updated").textContent = "更新：" + data.indicators_updated;
+  }
+
+  // 壓力/支撐
+  const strikes = data.options_strikes || {};
+  document.getElementById("resistance-val").textContent = strikes.resistance != null ? strikes.resistance : "—";
+  document.getElementById("support-val").textContent    = strikes.support    != null ? strikes.support    : "—";
+
+  // P/C 比
+  const pc = data.pc_ratio || {};
+  const cur = pc.current, ma3 = pc.ma3, ma10 = pc.ma10;
+  const pcBody = document.getElementById("pc-body");
+  const isBull = cur != null && ma3 != null && ma10 != null && cur > ma3 && ma3 > ma10;
+  const isBear = cur != null && ma3 != null && ma10 != null && cur < ma3 && ma3 < ma10;
+
+  if (isBull) {
+    pcBody.className = "pc-bull";
+    pcBody.innerHTML = `
+      <tr><td>現值</td><td>${fmt(cur,2)}</td></tr>
+      <tr><td>3MA</td><td>${fmt(ma3,2)}</td></tr>
+      <tr><td>10MA</td><td>${fmt(ma10,2)}</td></tr>`;
+  } else if (isBear) {
+    pcBody.className = "pc-bear";
+    pcBody.innerHTML = `
+      <tr><td>10MA</td><td>${fmt(ma10,2)}</td></tr>
+      <tr><td>3MA</td><td>${fmt(ma3,2)}</td></tr>
+      <tr><td>現值</td><td>${fmt(cur,2)}</td></tr>`;
+  } else {
+    pcBody.className = "";
+    pcBody.innerHTML = `
+      <tr><td>現值</td><td>${cur  != null ? fmt(cur, 2)  : "—"}</td></tr>
+      <tr><td>3MA</td><td>${ma3  != null ? fmt(ma3, 2)  : "—"}</td></tr>
+      <tr><td>10MA</td><td>${ma10 != null ? fmt(ma10, 2) : "—"}</td></tr>`;
+  }
+
+  // 美日韓指數
+  const allIndices = Object.assign({}, data.us_indices || {}, data.asia_indices || {});
+  const order = ["^DJI","^GSPC","^IXIC","^SOX","^N225","^KS11"];
+  const tbody = document.getElementById("global-body");
+  tbody.innerHTML = "";
+  order.forEach(sym => {
+    const idx = allIndices[sym];
+    if (!idx) return;
+    const chgClass = idx.change_pct > 0 ? "positive" : idx.change_pct < 0 ? "negative" : "neutral";
+    const sign = idx.change > 0 ? "+" : "";
+    tbody.innerHTML += `
+      <tr>
+        <td>${idx.name}（${sym}）</td>
+        <td>${fmt(idx.close, 2)}</td>
+        <td class="${chgClass}">${sign}${fmt(idx.change, 2)}</td>
+        <td class="${chgClass}">${sign}${fmt(idx.change_pct, 2)}%</td>
+      </tr>`;
+  });
+  const usUpdated  = data.us_updated   || "";
+  const asiaUpdated = data.asia_updated || "";
+  document.getElementById("global-updated").textContent =
+    [usUpdated && "美股更新：" + usUpdated, asiaUpdated && "亞股更新：" + asiaUpdated].filter(Boolean).join("　");
+}
+
+loadData();
+</script>
+</body>
+</html>

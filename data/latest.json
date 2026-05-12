@@ -1,0 +1,81 @@
+{
+  "date": "2026-05-12",
+  "us_indices": {
+    "^DJI": {
+      "name": "道瓊工業",
+      "close": 49704.47,
+      "change": 95.31,
+      "change_pct": 0.19
+    },
+    "^GSPC": {
+      "name": "S&P 500",
+      "close": 7412.84,
+      "change": 13.91,
+      "change_pct": 0.19
+    },
+    "^IXIC": {
+      "name": "那斯達克",
+      "close": 26274.12,
+      "change": 27.04,
+      "change_pct": 0.1
+    },
+    "^SOX": {
+      "name": "費城半導體",
+      "close": 12081.04,
+      "change": 305.54,
+      "change_pct": 2.59
+    }
+  },
+  "us_updated": "2026-05-12 09:15:45",
+  "asia_indices": {
+    "^N225": {
+      "name": "日經 225",
+      "close": 63188.65,
+      "change": 475.0,
+      "change_pct": 0.76
+    },
+    "^KS11": {
+      "name": "韓國綜合",
+      "close": 7920.2,
+      "change": 422.2,
+      "change_pct": 5.63
+    }
+  },
+  "asia_updated": "2026-05-12 09:15:44",
+  "institutional": {
+    "foreign": {
+      "stock_net_yi": -109.8,
+      "futures_net_lot": 280,
+      "futures_oi_lot": -54225,
+      "options_sign": "positive"
+    },
+    "trust": {
+      "stock_net_yi": 124.9,
+      "futures_net_lot": 302,
+      "futures_oi_lot": 46609,
+      "options_sign": "negative"
+    }
+  },
+  "institutional_updated": "2026-05-12 09:15:39",
+  "taiex": {
+    "close": 41790.06,
+    "volume_yi": 11705,
+    "txf_vol_wan": 4.82,
+    "ema11": 40352,
+    "ema24": 38548,
+    "sma60": 35211
+  },
+  "pc_ratio": {
+    "current": 162.33,
+    "ma3": 172.61,
+    "ma10": 160.74
+  },
+  "indicators_updated": "2026-05-12 09:15:43",
+  "options_strikes": {
+    "resistance": 43000,
+    "support": 35000,
+    "month": "2026-05",
+    "updated": "2026-05-10 01:21:34",
+    "note": "以近月合約成交量最大履約價代替 OI"
+  }
+}

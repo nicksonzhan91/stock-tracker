@@ -26,22 +26,22 @@
       "change_pct": 2.59
     }
   },
-  "us_updated": "2026-05-12 09:15:45",
+  "us_updated": "2026-05-12 10:37:00",
   "asia_indices": {
     "^N225": {
       "name": "日經 225",
-      "close": 63188.65,
-      "change": 475.0,
-      "change_pct": 0.76
+      "close": 62706.34,
+      "change": 288.46,
+      "change_pct": 0.46
     },
     "^KS11": {
       "name": "韓國綜合",
-      "close": 7920.2,
-      "change": 422.2,
-      "change_pct": 5.63
+      "close": 7693.42,
+      "change": -128.82,
+      "change_pct": -1.65
     }
   },
-  "asia_updated": "2026-05-12 09:15:44",
+  "asia_updated": "2026-05-12 10:37:03",
   "institutional": {
     "foreign": {
       "stock_net_yi": -109.8,

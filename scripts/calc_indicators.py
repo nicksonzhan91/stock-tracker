@@ -275,6 +275,21 @@ def main():
     pc_10ma = calc_ma(pc_vals, 10)
     print(f"P/C 3MA={pc_3ma}  P/C 10MA={pc_10ma}")
 
+    # 4-1. 計算近 20 筆每日的 3MA / 10MA，供圖表使用
+    chart_data = []
+    for i in range(len(pc_hist)):
+        vals_up_to_i = [pc_hist[j]["pc"] for j in range(i + 1)]
+        ma3  = round(sum(vals_up_to_i[-3:])  / min(3, len(vals_up_to_i)), 2)
+        ma10 = round(sum(vals_up_to_i[-10:]) / min(10, len(vals_up_to_i)), 2) if len(vals_up_to_i) >= 2 else None
+        chart_data.append({
+            "date":    pc_hist[i]["date"],
+            "current": pc_hist[i]["pc"],
+            "ma3":     ma3,
+            "ma10":    ma10,
+        })
+    pc_chart = chart_data[-20:]   # 只取最近 20 筆
+    print(f"圖表資料: {len(pc_chart)} 筆")
+
     # 5. 寫回 latest.json
     data = {}
     if os.path.exists(DATA_FILE) and os.path.getsize(DATA_FILE) > 2:
@@ -293,6 +308,7 @@ def main():
         "current": pc_today,
         "ma3":     pc_3ma,
         "ma10":    pc_10ma,
+        "chart":   pc_chart,
     }
     data["indicators_updated"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 

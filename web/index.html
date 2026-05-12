@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>台股市場儀表板</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: "Segoe UI", "Microsoft JhengHei", sans-serif; background: #1a1a2e; color: #e0e0e0; font-size: 14px; }
@@ -33,8 +34,15 @@
   .resistance { background: #f1c40f; color: #1a1a2e; font-weight: bold; padding: 2px 6px; border-radius: 4px; }
   .support    { background: #f1c40f; color: #1a1a2e; font-weight: bold; padding: 2px 6px; border-radius: 4px; }
 
-  .pc-bull { background: rgba(192,57,43,0.2); border-radius: 6px; }
-  .pc-bear { background: rgba(39,174,96,0.2); border-radius: 6px; }
+  .pc-card-bull { border-color: rgba(192,57,43,0.6) !important; background: linear-gradient(180deg, #16213e 80%, rgba(192,57,43,0.12)); }
+  .pc-card-bear { border-color: rgba(39,174,96,0.6)  !important; background: linear-gradient(180deg, #16213e 80%, rgba(39,174,96,0.12)); }
+  .pc-badge { display:inline-block; padding:2px 8px; border-radius:4px; font-size:0.75rem; font-weight:bold; margin-left:6px; }
+  .pc-badge-bull { background:#c0392b; color:#fff; }
+  .pc-badge-bear { background:#27ae60; color:#fff; }
+  .pc-badge-flat { background:#555; color:#ccc; }
+  .pc-legend { display:flex; gap:16px; margin-top:6px; font-size:0.75rem; }
+  .pc-legend span { display:flex; align-items:center; gap:4px; }
+  .pc-legend i { display:inline-block; width:24px; height:3px; border-radius:2px; }
 
   .spacer td { height: 8px; }
 
@@ -119,22 +127,19 @@
     <div class="tag" style="margin-top:8px;" id="taiex-updated"></div>
   </div>
 
-  <!-- 左下：P/C 比 -->
+  <!-- 左下：P/C 比圖表 -->
   <div class="card" id="card-pc">
-    <h2>動能指標 — P/C 比（Put/Call 未平倉量比率）</h2>
-    <table id="table-pc">
-      <thead>
-        <tr>
-          <th>指標</th>
-          <th>數值</th>
-        </tr>
-      </thead>
-      <tbody id="pc-body">
-        <tr><td>現值</td><td id="pc-current">—</td></tr>
-        <tr><td>3MA</td><td id="pc-3ma">—</td></tr>
-        <tr><td>10MA</td><td id="pc-10ma">—</td></tr>
-      </tbody>
-    </table>
+    <h2>
+      動能指標 — P/C 比（Put/Call 未平倉量比率）
+      <span class="pc-badge" id="pc-trend-badge">—</span>
+    </h2>
+    <canvas id="pc-chart" height="160"></canvas>
+    <div class="pc-legend">
+      <span><i style="background:#e0e0e0;"></i>現值</span>
+      <span><i style="background:#f39c12;"></i>3MA</span>
+      <span><i style="background:#5dade2;"></i>10MA</span>
+    </div>
+    <div class="tag" style="margin-top:6px;" id="pc-values-text"></div>
   </div>
 
   <!-- 底部全寬：美日韓指數 -->
@@ -232,31 +237,107 @@ async function loadData() {
   document.getElementById("resistance-val").textContent = strikes.resistance != null ? strikes.resistance : "—";
   document.getElementById("support-val").textContent    = strikes.support    != null ? strikes.support    : "—";
 
-  // P/C 比
-  const pc = data.pc_ratio || {};
-  const cur = pc.current, ma3 = pc.ma3, ma10 = pc.ma10;
-  const pcBody = document.getElementById("pc-body");
-  const isBull = cur != null && ma3 != null && ma10 != null && cur > ma3 && ma3 > ma10;
-  const isBear = cur != null && ma3 != null && ma10 != null && cur < ma3 && ma3 < ma10;
+  // P/C 比圖表
+  const pc      = data.pc_ratio || {};
+  const cur     = pc.current, ma3 = pc.ma3, ma10 = pc.ma10;
+  const isBull  = cur != null && ma3 != null && ma10 != null && cur > ma3 && ma3 > ma10;
+  const isBear  = cur != null && ma3 != null && ma10 != null && cur < ma3 && ma3 < ma10;
+  const pcCard  = document.getElementById("card-pc");
+  const badge   = document.getElementById("pc-trend-badge");
 
+  // 卡片邊框與趨勢標籤
+  pcCard.className = "card" + (isBull ? " pc-card-bull" : isBear ? " pc-card-bear" : "");
   if (isBull) {
-    pcBody.className = "pc-bull";
-    pcBody.innerHTML = `
-      <tr><td>現值</td><td>${fmt(cur,2)}</td></tr>
-      <tr><td>3MA</td><td>${fmt(ma3,2)}</td></tr>
-      <tr><td>10MA</td><td>${fmt(ma10,2)}</td></tr>`;
+    badge.textContent = "多頭排列"; badge.className = "pc-badge pc-badge-bull";
   } else if (isBear) {
-    pcBody.className = "pc-bear";
-    pcBody.innerHTML = `
-      <tr><td>10MA</td><td>${fmt(ma10,2)}</td></tr>
-      <tr><td>3MA</td><td>${fmt(ma3,2)}</td></tr>
-      <tr><td>現值</td><td>${fmt(cur,2)}</td></tr>`;
+    badge.textContent = "空頭排列"; badge.className = "pc-badge pc-badge-bear";
   } else {
-    pcBody.className = "";
-    pcBody.innerHTML = `
-      <tr><td>現值</td><td>${cur  != null ? fmt(cur, 2)  : "—"}</td></tr>
-      <tr><td>3MA</td><td>${ma3  != null ? fmt(ma3, 2)  : "—"}</td></tr>
-      <tr><td>10MA</td><td>${ma10 != null ? fmt(ma10, 2) : "—"}</td></tr>`;
+    badge.textContent = "排列不整"; badge.className = "pc-badge pc-badge-flat";
+  }
+
+  // 數值摘要文字
+  document.getElementById("pc-values-text").textContent =
+    `現值 ${cur ?? "—"}　3MA ${ma3 ?? "—"}　10MA ${ma10 ?? "—"}`;
+
+  // 繪製折線圖
+  const chartRows = (pc.chart || []);
+  if (chartRows.length > 0) {
+    const labels  = chartRows.map(r => r.date.slice(5));   // MM-DD
+    const curData = chartRows.map(r => r.current);
+    const ma3Data = chartRows.map(r => r.ma3);
+    const ma10Data= chartRows.map(r => r.ma10);
+
+    const allVals = [...curData, ...ma3Data, ...ma10Data].filter(v => v != null);
+    const minY = Math.floor(Math.min(...allVals) * 0.97);
+    const maxY = Math.ceil( Math.max(...allVals) * 1.03);
+
+    const ctx = document.getElementById("pc-chart").getContext("2d");
+    if (window._pcChart) window._pcChart.destroy();
+    window._pcChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "現值",
+            data: curData,
+            borderColor: "#e0e0e0",
+            backgroundColor: "rgba(224,224,224,0.08)",
+            borderWidth: 2,
+            pointRadius: 3,
+            pointHoverRadius: 5,
+            tension: 0.3,
+          },
+          {
+            label: "3MA",
+            data: ma3Data,
+            borderColor: "#f39c12",
+            backgroundColor: "transparent",
+            borderWidth: 2,
+            pointRadius: 0,
+            pointHoverRadius: 4,
+            tension: 0.3,
+          },
+          {
+            label: "10MA",
+            data: ma10Data,
+            borderColor: "#5dade2",
+            backgroundColor: "transparent",
+            borderWidth: 2,
+            pointRadius: 0,
+            pointHoverRadius: 4,
+            tension: 0.3,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        animation: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: "#0f3460",
+            titleColor: "#8ec5fc",
+            bodyColor: "#e0e0e0",
+            callbacks: {
+              label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y?.toFixed(2)}`,
+            },
+          },
+        },
+        scales: {
+          x: {
+            ticks: { color: "#aaa", font: { size: 10 }, maxRotation: 45 },
+            grid:  { color: "rgba(255,255,255,0.05)" },
+          },
+          y: {
+            min: minY, max: maxY,
+            ticks: { color: "#aaa", font: { size: 10 }, callback: v => v.toFixed(0) },
+            grid:  { color: "rgba(255,255,255,0.08)" },
+          },
+        },
+      },
+    });
   }
 
   // 美日韓指數

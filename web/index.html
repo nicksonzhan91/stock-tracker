@@ -196,8 +196,12 @@ async function loadData() {
     return;
   }
 
-  // 日期
-  document.getElementById("header-date").textContent = data.date || "—";
+  // 日期：永遠顯示今天的實際日期
+  const today = new Date();
+  const dateLabel = today.getFullYear() + "-"
+    + String(today.getMonth() + 1).padStart(2, "0") + "-"
+    + String(today.getDate()).padStart(2, "0");
+  document.getElementById("header-date").textContent = dateLabel;
 
   // 法人動態
   const inst = data.institutional || {};

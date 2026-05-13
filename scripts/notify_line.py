@@ -69,13 +69,12 @@ def main():
         print('  [System.Environment]::SetEnvironmentVariable("TELEGRAM_CHAT_ID", "你的ChatID", "User")')
         return
 
-    # 讀取最新資料
+    # 讀取最新資料（日期固定用今天，不受資料日期影響）
     date_str = datetime.now().strftime("%Y-%m-%d")
     data = {}
     if os.path.exists(DATA_FILE) and os.path.getsize(DATA_FILE) > 2:
         with open(DATA_FILE, "r", encoding="utf-8") as f:
             data = json.load(f)
-        date_str = data.get("date", date_str)
 
     message = build_message(data, date_str)
     print(f"發送訊息:\n{message}\n")

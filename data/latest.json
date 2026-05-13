@@ -1,62 +1,62 @@
 {
-  "date": "2026-05-12",
+  "date": "2026-05-13",
   "us_indices": {
     "^DJI": {
       "name": "道瓊工業",
-      "close": 49704.47,
-      "change": 95.31,
-      "change_pct": 0.19
+      "close": 49760.56,
+      "change": 56.09,
+      "change_pct": 0.11
     },
     "^GSPC": {
       "name": "S&P 500",
-      "close": 7412.84,
-      "change": 13.91,
-      "change_pct": 0.19
+      "close": 7400.96,
+      "change": -11.88,
+      "change_pct": -0.16
     },
     "^IXIC": {
       "name": "那斯達克",
-      "close": 26274.12,
-      "change": 27.04,
-      "change_pct": 0.1
+      "close": 26088.2,
+      "change": -185.93,
+      "change_pct": -0.71
     },
     "^SOX": {
       "name": "費城半導體",
-      "close": 12081.04,
-      "change": 305.54,
-      "change_pct": 2.59
+      "close": 11717.26,
+      "change": -363.78,
+      "change_pct": -3.01
     }
   },
-  "us_updated": "2026-05-12 10:37:00",
+  "us_updated": "2026-05-13 08:44:54",
   "asia_indices": {
     "^N225": {
       "name": "日經 225",
-      "close": 62706.34,
-      "change": 288.46,
-      "change_pct": 0.46
+      "close": 62491.52,
+      "change": 73.64,
+      "change_pct": 0.12
     },
     "^KS11": {
       "name": "韓國綜合",
-      "close": 7693.42,
-      "change": -128.82,
-      "change_pct": -1.65
+      "close": 7462.92,
+      "change": -359.32,
+      "change_pct": -4.59
     }
   },
-  "asia_updated": "2026-05-12 10:37:03",
+  "asia_updated": "2026-05-13 08:44:53",
   "institutional": {
     "foreign": {
-      "stock_net_yi": -109.8,
-      "futures_net_lot": 280,
-      "futures_oi_lot": -54225,
-      "options_sign": "positive"
+      "stock_net_yi": -304.9,
+      "futures_net_lot": 1153,
+      "futures_oi_lot": -53072,
+      "options_sign": "negative"
     },
     "trust": {
-      "stock_net_yi": 124.9,
-      "futures_net_lot": 302,
-      "futures_oi_lot": 46609,
+      "stock_net_yi": 383.2,
+      "futures_net_lot": -1744,
+      "futures_oi_lot": 44865,
       "options_sign": "negative"
     }
   },
-  "institutional_updated": "2026-05-12 09:15:39",
+  "institutional_updated": "2026-05-13 08:44:54",
   "taiex": {
     "close": 41790.06,
     "volume_yi": 11705,

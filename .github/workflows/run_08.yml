@@ -1,0 +1,40 @@
+name: 08:00 亞股資料 + Telegram 推送
+
+on:
+  schedule:
+    - cron: "0 0 * * 2-6"    # UTC 00:00 = 台灣 08:00（週二至週六，對應週一至週五交易日）
+  workflow_dispatch:
+
+jobs:
+  fetch-and-notify:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONUTF8: "1"
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests yfinance beautifulsoup4 urllib3
+
+      - name: 執行 fetch_asia.py
+        run: python scripts/fetch_asia.py
+
+      - name: 寫回 latest.json
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "data: 更新亞股資料 [skip ci]"
+          file_pattern: data/latest.json
+
+      - name: 發送 Telegram 通知
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python scripts/notify_line.py

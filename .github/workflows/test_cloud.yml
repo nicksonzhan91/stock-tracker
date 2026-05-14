@@ -1,0 +1,43 @@
+name: 雲端腳本測試
+
+on:
+  workflow_dispatch:   # 只手動觸發
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONUTF8: "1"
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests yfinance beautifulsoup4 urllib3
+
+      - name: 測試 fetch_us.py（美股）
+        run: python scripts/fetch_us.py
+
+      - name: 測試 fetch_asia.py（亞股）
+        run: python scripts/fetch_asia.py
+
+      - name: 測試 fetch_institutional.py（法人 TWSE/TAIFEX）
+        run: python scripts/fetch_institutional.py
+
+      - name: 測試 calc_indicators.py（均線 P/C 比）
+        run: python scripts/calc_indicators.py
+
+      - name: 顯示 latest.json 結果
+        run: cat data/latest.json
+
+      - name: 測試 Telegram 通知
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python scripts/notify_line.py

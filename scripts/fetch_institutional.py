@@ -23,7 +23,7 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
 }
 
-TWSE_BFI82U   = "https://www.twse.com.tw/rwd/zh/fund/BFI82U?response=json&dayDate=&type=day"
+TWSE_BFI82U   = "https://www.twse.com.tw/rwd/zh/fund/BFI82U?response=json&type=day&dayDate={}"
 TAIFEX_FUT    = "https://www.taifex.com.tw/cht/3/futContractsDate"
 TAIFEX_OPT    = "https://www.taifex.com.tw/cht/3/callsAndPutsDate"
 
@@ -59,23 +59,34 @@ def _last_trading_date(session: requests.Session, url: str, extra_params: dict =
 
 # ── 現股買賣差額（TWSE BFI82U） ──────────────────────────
 
-def fetch_stock_net() -> dict:
+def fetch_stock_net(query_date: str) -> dict:
+    """query_date 格式 YYYY/MM/DD，轉成 YYYYMMDD 給 TWSE"""
     result = {"foreign": None, "trust": None}
-    try:
-        resp = requests.get(TWSE_BFI82U, headers=HEADERS, timeout=15, verify=False)
-        resp.raise_for_status()
-        data = resp.json()
-        for row in data.get("data", []):
-            name     = row[0].strip()
-            diff_yi  = round(_num(row[3]) / 1e8, 1)  # 元 → 億元
-            if "外資及陸資" in name:
-                # 累加「不含外資自營商」與「外資自營商」兩列
-                result["foreign"] = round((result["foreign"] or 0) + diff_yi, 1)
-            elif name == "投信":
-                result["trust"] = diff_yi
-        print(f"現股買賣差額 — 外資: {result['foreign']} 億  投信: {result['trust']} 億")
-    except Exception as e:
-        print(f"[錯誤] 現股買賣超: {e}")
+    # 往回最多找 5 個交易日
+    d = datetime.strptime(query_date, "%Y/%m/%d")
+    for _ in range(5):
+        day_str = d.strftime("%Y%m%d")
+        url = TWSE_BFI82U.format(day_str)
+        try:
+            resp = requests.get(url, headers=HEADERS, timeout=15, verify=False)
+            resp.raise_for_status()
+            data = resp.json()
+            rows = data.get("data", [])
+            if not rows:
+                d -= timedelta(days=1)
+                continue
+            for row in rows:
+                name    = row[0].strip()
+                diff_yi = round(_num(row[3]) / 1e8, 1)
+                if "外資及陸資" in name:
+                    result["foreign"] = round((result["foreign"] or 0) + diff_yi, 1)
+                elif name == "投信":
+                    result["trust"] = diff_yi
+            print(f"現股買賣差額({day_str}) — 外資: {result['foreign']} 億  投信: {result['trust']} 億")
+            return result
+        except Exception as e:
+            print(f"[錯誤] 現股買賣超({day_str}): {e}")
+        d -= timedelta(days=1)
     return result
 
 
@@ -237,7 +248,7 @@ def main():
     query_date = _last_trading_date(session, TAIFEX_FUT)
     print(f"查詢日期: {query_date}")
 
-    stock_net    = fetch_stock_net()
+    stock_net    = fetch_stock_net(query_date)
     futures_pos  = fetch_futures_positions(session, query_date)
     options_sign = fetch_options_net_value(session, query_date)
 

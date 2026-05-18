@@ -1,5 +1,4 @@
 logs/
-data/history/
 __pycache__/
 *.pyc
 *.log

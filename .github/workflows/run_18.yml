@@ -36,4 +36,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "data: 更新台股法人與指標 [skip ci]"
-          file_pattern: data/latest.json data/history/*.json
+          file_pattern: data/latest.json data/history/

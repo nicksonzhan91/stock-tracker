@@ -44,50 +44,32 @@
   "asia_updated": "2026-05-14 09:27:40",
   "institutional": {
     "foreign": {
-      "stock_net_yi": -304.9,
-      "futures_net_lot": 1153,
-      "futures_oi_lot": -53072,
+      "stock_net_yi": null,
+      "futures_net_lot": 158,
+      "futures_oi_lot": -50963,
       "options_sign": "negative"
     },
     "trust": {
-      "stock_net_yi": 383.2,
-      "futures_net_lot": -1744,
-      "futures_oi_lot": 44865,
+      "stock_net_yi": null,
+      "futures_net_lot": -1378,
+      "futures_oi_lot": 41738,
       "options_sign": "negative"
     }
   },
-  "institutional_updated": "2026-05-13 08:44:54",
+  "institutional_updated": "2026-05-18 02:04:37",
   "taiex": {
-    "close": 41898.32,
-    "volume_yi": 14462,
-    "txf_vol_wan": 7.7,
-    "ema11": 40609,
-    "ema24": 38816,
-    "sma60": 35382
+    "close": 41172.36,
+    "volume_yi": 13749,
+    "txf_vol_wan": 7.77,
+    "ema11": 40703,
+    "ema24": 39004,
+    "sma60": 35531
   },
   "pc_ratio": {
-    "current": 161.65,
-    "ma3": 168.45,
-    "ma10": 163.22,
+    "current": 162.43,
+    "ma3": 164.73,
+    "ma10": 167.58,
     "chart": [
-      {
-        "date": "2026-04-14",
-        "current": 165.4,
-        "ma3": 149.14,
-        "ma10": 149.14
-      },
-      {
-        "date": "2026-04-15",
-        "current": 149.68,
-        "ma3": 151.99,
-        "ma10": 149.28
-      },
-      {
-        "date": "2026-04-16",
-        "current": 135.39,
-        "ma3": 150.16,
-        "ma10": 146.5
-      },
       {
         "date": "2026-04-17",
         "current": 131.72,
@@ -189,10 +171,28 @@
         "current": 161.65,
         "ma3": 168.45,
         "ma10": 163.22
+      },
+      {
+        "date": "2026-05-13",
+        "current": 169.31,
+        "ma3": 164.43,
+        "ma10": 168.1
+      },
+      {
+        "date": "2026-05-14",
+        "current": 162.46,
+        "ma3": 164.47,
+        "ma10": 167.23
+      },
+      {
+        "date": "2026-05-15",
+        "current": 162.43,
+        "ma3": 164.73,
+        "ma10": 167.58
       }
     ]
   },
-  "indicators_updated": "2026-05-13 08:44:58",
+  "indicators_updated": "2026-05-18 02:04:45",
   "options_strikes": {
     "resistance": 43000,
     "support": 35000,

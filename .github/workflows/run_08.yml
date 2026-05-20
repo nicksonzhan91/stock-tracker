@@ -34,6 +34,10 @@ jobs:
           commit_message: "data: 更新亞股資料 [skip ci]"
           file_pattern: data/latest.json
 
+      - name: 等待 GitHub Pages 部署完成
+        if: success()
+        run: sleep 120    # 等 2 分鐘，確保網頁更新後再發通知
+
       - name: 發送 Telegram 通知
         if: success()
         env:

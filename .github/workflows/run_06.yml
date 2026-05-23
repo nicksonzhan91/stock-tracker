@@ -2,7 +2,7 @@ name: 06:00 美股資料收集
 
 on:
   schedule:
-    - cron: "0 22 * * 1-5"   # UTC 22:00 = 台灣 06:00（週一至週五）
+    - cron: "0 22 * * 1-6"   # UTC 22:00 = 台灣 06:00（週一至週六）
   workflow_dispatch:
 
 jobs:

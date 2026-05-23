@@ -44,19 +44,19 @@
   "asia_updated": "2026-05-22 00:10:31",
   "institutional": {
     "foreign": {
-      "stock_net_yi": 603.4,
+      "stock_net_yi": 761.4,
       "futures_net_lot": -2059,
       "futures_oi_lot": -46483,
       "options_sign": "positive"
     },
     "trust": {
-      "stock_net_yi": 53.8,
+      "stock_net_yi": 112.3,
       "futures_net_lot": 1334,
       "futures_oi_lot": 42047,
       "options_sign": "negative"
     }
   },
-  "institutional_updated": "2026-05-22 17:19:53",
+  "institutional_updated": "2026-05-24 00:48:28",
   "taiex": {
     "close": 42267.97,
     "volume_yi": 12369,

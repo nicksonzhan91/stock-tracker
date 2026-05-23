@@ -52,6 +52,14 @@
 
   .tag { font-size: 0.75rem; color: #aaa; }
 
+  .vz-card { border-color: rgba(46,213,115,0.35) !important; }
+  .vz-card h2 { color: #2ed573; border-bottom-color: rgba(46,213,115,0.25); }
+  .vz-badge { display:inline-block; background:#2ed573; color:#1a1a2e; font-size:0.72rem; font-weight:bold; padding:1px 7px; border-radius:10px; margin-left:6px; vertical-align:middle; }
+  .vz-badge-zero { background:#555; color:#ccc; }
+  .vz-ratio { color:#2ed573; font-weight:bold; }
+  .vz-new { font-size:0.7rem; background:rgba(46,213,115,0.2); color:#2ed573; padding:1px 5px; border-radius:3px; margin-left:4px; }
+  .vz-empty { color:#666; font-style:italic; text-align:center; padding:16px 0; }
+
   @media (max-width: 700px) {
     .grid { grid-template-columns: 1fr; }
     .right-col { grid-row: auto; }
@@ -149,6 +157,27 @@
       <tbody id="global-body"></tbody>
     </table>
     <div class="tag" style="margin-top:8px;" id="global-updated"></div>
+  </div>
+
+  <!-- 超跌好公司 -->
+  <div class="card full-width vz-card" id="card-value-zone">
+    <h2>
+      超跌好公司（價值低估區）
+      <span class="vz-badge vz-badge-zero" id="vz-count">—</span>
+    </h2>
+    <table id="table-value-zone">
+      <thead>
+        <tr>
+          <th>代號</th>
+          <th>名稱</th>
+          <th>潛在獲利%</th>
+        </tr>
+      </thead>
+      <tbody id="vz-body">
+        <tr><td colspan="3" class="vz-empty">載入中…</td></tr>
+      </tbody>
+    </table>
+    <div class="tag" style="margin-top:8px;" id="vz-updated"></div>
   </div>
 
 </div>
@@ -377,6 +406,42 @@ async function loadData() {
 }
 
 loadData();
+loadValueZone();
+
+async function loadValueZone() {
+  const tbody  = document.getElementById("vz-body");
+  const badge  = document.getElementById("vz-count");
+  const updated = document.getElementById("vz-updated");
+
+  let data;
+  try {
+    const resp = await fetch("../data/value_zone.json?t=" + Date.now());
+    data = await resp.json();
+  } catch(e) {
+    tbody.innerHTML = '<tr><td colspan="7" class="vz-empty">資料尚未產生，請先執行 export_value_excel.py</td></tr>';
+    return;
+  }
+
+  const stocks = data.stocks || [];
+  badge.textContent  = stocks.length + " 支";
+  badge.className    = stocks.length > 0 ? "vz-badge" : "vz-badge vz-badge-zero";
+  updated.textContent = "資料日期：" + (data.date || "—") + "　監控 " + (data.total || "—") + " 支";
+
+  if (stocks.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="3" class="vz-empty">目前無股票進入低估區</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = "";
+  stocks.forEach(s => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${s.stock_id}</td>
+      <td style="text-align:left;">${s.name}</td>
+      <td class="vz-ratio">+${fmt(s.ratio, 1)}%</td>`;
+    tbody.appendChild(tr);
+  });
+}
 </script>
 </body>
 </html>

@@ -5,7 +5,6 @@ notify_value.py — 價值低估區 Telegram 通知
 讀取 data/value_zone.json，與上次結果比對，發送：
   - 新進入低估區的股票（★新進入）
   - 離開低估區的股票
-  - 當前完整低估區清單
 """
 
 import os
@@ -69,19 +68,6 @@ def build_message(current: dict, prev: dict | None) -> str:
             s = prev_map[sid]
             lines.append(f"  {s['stock_id']} {s['name']}")
         lines.append("")
-
-    # 完整低估區清單
-    if zone_stocks:
-        lines.append(f"📋 <b>目前低估區清單</b>")
-        for s in zone_stocks:
-            marker = "★" if s["stock_id"] in new_entries else "  "
-            lines.append(
-                f"{marker} {s['stock_id']} {s['name']}\n"
-                f"     現價 {s['price']:.1f}｜買入 {s['buy_target']:.1f}"
-                f"｜合理 {s['value']:.1f}｜+{s['ratio']:.1f}%｜ROE {s['avg_roe']:.1f}%"
-            )
-    else:
-        lines.append("目前無股票進入低估區")
 
     lines.append("")
     lines.append(f"🔗 {DASHBOARD_URL}")

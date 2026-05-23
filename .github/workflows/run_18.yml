@@ -40,3 +40,19 @@ jobs:
         with:
           commit_message: "data: 更新台股法人與指標 [skip ci]"
           file_pattern: data/latest.json data/history/ data/value_zone.json data/value_zone_prev.json
+
+      - name: 發送 Telegram 通知
+        if: success()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python - <<'EOF'
+          import os, requests
+          token   = os.environ["TELEGRAM_BOT_TOKEN"]
+          chat_id = os.environ["TELEGRAM_CHAT_ID"]
+          msg = "📊 台股資料已更新\n\n🔗 https://nicksonzhan91.github.io/stock-tracker/web/index.html"
+          r = requests.post(f"https://api.telegram.org/bot{token}/sendMessage",
+                            json={"chat_id": chat_id, "text": msg}, timeout=10)
+          print("Telegram 通知發送成功" if r.status_code == 200 else f"失敗: {r.text}")
+          EOF

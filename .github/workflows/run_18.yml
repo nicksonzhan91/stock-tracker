@@ -40,10 +40,3 @@ jobs:
         with:
           commit_message: "data: 更新台股法人與指標 [skip ci]"
           file_pattern: data/latest.json data/history/ data/value_zone.json data/value_zone_prev.json
-
-      - name: 發送 Telegram 價值低估區通知
-        if: success()
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python scripts/notify_value.py

@@ -1,0 +1,42 @@
+name: 每月第三週四 20:00 選擇權履約價更新
+
+on:
+  schedule:
+    - cron: "0 12 * * 4"   # UTC 12:00 = 台灣 20:00 每週四
+  workflow_dispatch:
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      PYTHONUTF8: "1"
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4 urllib3
+
+      - name: 執行 fetch_options.py（僅第三週四）
+        run: |
+          day=$(date +%d)
+          if [ "$day" -ge 15 ] && [ "$day" -le 21 ]; then
+            python scripts/fetch_options.py
+          else
+            echo "今日非第三週四（日期 $day），略過"
+          fi
+
+      - name: 寫回 latest.json
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "data: 更新選擇權履約價 [skip ci]"
+          file_pattern: data/latest.json

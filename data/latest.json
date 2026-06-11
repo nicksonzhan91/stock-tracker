@@ -3,21 +3,21 @@
   "us_indices": {
     "^DJI": {
       "name": "道瓊工業",
-      "close": NaN,
-      "change": NaN,
-      "change_pct": NaN
+      "close": null,
+      "change": null,
+      "change_pct": null
     },
     "^GSPC": {
       "name": "S&P 500",
-      "close": NaN,
-      "change": NaN,
-      "change_pct": NaN
+      "close": null,
+      "change": null,
+      "change_pct": null
     },
     "^IXIC": {
       "name": "那斯達克",
-      "close": NaN,
-      "change": NaN,
-      "change_pct": NaN
+      "close": null,
+      "change": null,
+      "change_pct": null
     },
     "^SOX": {
       "name": "費城半導體",

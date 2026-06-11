@@ -5,6 +5,7 @@ fetch_asia.py — 抓取日韓即時指數（08:00 執行）
 """
 
 import json
+import math
 import os
 import sys
 from datetime import datetime
@@ -30,8 +31,11 @@ def fetch_asia_indices():
                 print(f"[警告] {symbol} 資料不足")
                 continue
 
-            close = hist["Close"].iloc[-1]
-            prev_close = hist["Close"].iloc[-2]
+            close = float(hist["Close"].iloc[-1])
+            prev_close = float(hist["Close"].iloc[-2])
+            if math.isnan(close) or math.isnan(prev_close):
+                print(f"[警告] {symbol} 收到 NaN，略過")
+                continue
             change = close - prev_close
             change_pct = change / prev_close * 100
 

@@ -1,0 +1,61 @@
+name: 季排程 — 超跌好公司估值更新
+
+on:
+  schedule:
+    - cron: "0 10 15 1 *"    # UTC 10:00 = 台灣 18:00，1月15日
+    - cron: "0 10 15 4 *"    # UTC 10:00 = 台灣 18:00，4月15日
+    - cron: "0 10 15 7 *"    # UTC 10:00 = 台灣 18:00，7月15日
+    - cron: "0 10 15 10 *"   # UTC 10:00 = 台灣 18:00，10月15日
+  workflow_dispatch:          # 允許手動觸發
+
+jobs:
+  value-zone:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      PYTHONUTF8: "1"
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests yfinance beautifulsoup4 urllib3 openpyxl
+
+      - name: 執行 export_value_excel.py（計算合理價值 & 更新低估區）
+        run: python scripts/export_value_excel.py
+
+      - name: 寫回 value_zone.json 及 Excel
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "data: 季度更新超跌好公司估值 [skip ci]"
+          file_pattern: data/value_zone.json data/value_zone_prev.json
+
+      - name: 發送 Telegram 通知
+        if: success()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python - <<'EOF'
+          import os, requests, json
+          token   = os.environ["TELEGRAM_BOT_TOKEN"]
+          chat_id = os.environ["TELEGRAM_CHAT_ID"]
+          try:
+              d = json.load(open("data/value_zone.json", encoding="utf-8"))
+              cnt = len(d.get("stocks", []))
+              date = d.get("date", "")
+              msg = f"📊 超跌好公司估值已更新（{date}）\n共 {cnt} 支進入低估區\n\n🔗 https://nicksonzhan91.github.io/stock-tracker/web/index.html"
+          except Exception:
+              msg = "📊 超跌好公司季度估值已更新\n\n🔗 https://nicksonzhan91.github.io/stock-tracker/web/index.html"
+          r = requests.post(f"https://api.telegram.org/bot{token}/sendMessage",
+                            json={"chat_id": chat_id, "text": msg}, timeout=10)
+          print("Telegram 通知發送成功" if r.status_code == 200 else f"失敗: {r.text}")
+          EOF

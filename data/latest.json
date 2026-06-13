@@ -44,23 +44,23 @@
   "asia_updated": "2026-06-12 00:10:34",
   "institutional": {
     "foreign": {
-      "stock_net_yi": 286.9,
+      "stock_net_yi": null,
       "futures_net_lot": -1900,
       "futures_oi_lot": -65039,
       "options_sign": "positive"
     },
     "trust": {
-      "stock_net_yi": 142.3,
+      "stock_net_yi": null,
       "futures_net_lot": 1799,
       "futures_oi_lot": 57111,
       "options_sign": "negative"
     }
   },
-  "institutional_updated": "2026-06-12 12:55:53",
+  "institutional_updated": "2026-06-13 11:56:08",
   "taiex": {
     "close": 44169.04,
     "volume_yi": 11692,
-    "txf_vol_wan": 9.32,
+    "txf_vol_wan": 7.36,
     "ema11": 44181,
     "ema24": 43025,
     "sma60": 38729
@@ -192,7 +192,7 @@
       }
     ]
   },
-  "indicators_updated": "2026-06-12 12:56:05",
+  "indicators_updated": "2026-06-13 11:56:19",
   "options_strikes": {
     "resistance": 43000,
     "support": 35000,

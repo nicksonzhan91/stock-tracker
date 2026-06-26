@@ -1,0 +1,5 @@
+# 統一行尾為 LF，避免 Windows 編輯產生 CRLF 雜訊 diff
+* text=auto eol=lf
+
+# 二進位檔不做行尾正規化
+*.xlsx binary

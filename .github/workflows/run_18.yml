@@ -24,7 +24,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install requests yfinance beautifulsoup4 urllib3
+        run: pip install requests yfinance beautifulsoup4 urllib3 openpyxl
 
       - name: 執行 fetch_institutional.py
         run: python scripts/fetch_institutional.py
@@ -32,11 +32,14 @@ jobs:
       - name: 執行 calc_indicators.py
         run: python scripts/calc_indicators.py
 
+      - name: 每日刷新超跌好公司現價（合理價值維持季更新）
+        run: python scripts/update_value_zone_price.py
+
       - name: 寫回 latest.json 及歷史資料
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "data: 更新台股法人與指標 [skip ci]"
-          file_pattern: data/latest.json data/history/
+          commit_message: "data: 更新台股法人與指標 + 超跌好公司現價 [skip ci]"
+          file_pattern: data/latest.json data/history/ data/value_zone.json
 
       - name: 發送 Telegram 通知
         if: success()

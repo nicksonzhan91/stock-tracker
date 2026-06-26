@@ -27,6 +27,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 VALUE_LIST  = os.path.join(os.path.dirname(__file__), "..", "data", "value_list.json")
 OUTPUT_XLS  = os.path.join(os.path.dirname(__file__), "..", "data", "value_stocks.xlsx")
 OUTPUT_ZONE = os.path.join(os.path.dirname(__file__), "..", "data", "value_zone.json")
+OUTPUT_TARGETS = os.path.join(os.path.dirname(__file__), "..", "data", "value_targets.json")
 
 SINOTRADE = "https://stockchannelnew.sinotrade.com.tw"
 _HEADERS  = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
@@ -639,6 +640,21 @@ def main():
             "date":   price_date,
             "total":  len(all_data),
             "stocks": zone_stocks,
+        }, f, ensure_ascii=False, indent=2)
+
+    # ── 輸出 value_targets.json（季更新的合理價值基準；供每日價格腳本 update_value_zone_price.py 讀取）──
+    targets = [{
+        "stock_id":   d["stock_id"],
+        "name":       d["name"],
+        "value":      d["value"],
+        "buy_target": round(d["value"] / 1.2, 2) if d["value"] is not None else None,
+        "avg_roe":    d["avg_roe_pct"],
+    } for d in all_data]
+    with open(OUTPUT_TARGETS, "w", encoding="utf-8") as f:
+        json.dump({
+            "valuation_date": price_date,   # 合理價值計算日（季更新）
+            "total":          len(targets),
+            "stocks":         targets,
         }, f, ensure_ascii=False, indent=2)
 
     zone_cnt = len(zone_stocks)

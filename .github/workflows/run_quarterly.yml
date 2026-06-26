@@ -36,7 +36,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "data: 季度更新超跌好公司估值 [skip ci]"
-          file_pattern: data/value_zone.json data/value_zone_prev.json
+          file_pattern: data/value_zone.json data/value_zone_prev.json data/value_targets.json
 
       - name: 發送 Telegram 通知
         if: success()

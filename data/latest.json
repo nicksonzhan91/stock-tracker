@@ -56,14 +56,14 @@
       "options_sign": "negative"
     }
   },
-  "institutional_updated": "2026-07-10 12:27:13",
+  "institutional_updated": "2026-07-11 11:08:35",
   "taiex": {
-    "close": null,
-    "volume_yi": null,
+    "close": 45354.61,
+    "volume_yi": 9968,
     "txf_vol_wan": 5.24,
-    "ema11": 46039,
-    "ema24": 45395,
-    "sma60": 42385
+    "ema11": 45925,
+    "ema24": 45392,
+    "sma60": 42560
   },
   "pc_ratio": {
     "current": 118.81,
@@ -192,7 +192,7 @@
       }
     ]
   },
-  "indicators_updated": "2026-07-10 12:27:17",
+  "indicators_updated": "2026-07-11 11:08:40",
   "options_strikes": {
     "resistance": 53500,
     "support": 37500,

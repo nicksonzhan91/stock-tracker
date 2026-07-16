@@ -194,10 +194,10 @@
   },
   "indicators_updated": "2026-07-16 11:42:49",
   "options_strikes": {
-    "resistance": 53500,
-    "support": 37500,
-    "month": "2026-06",
-    "updated": "2026-06-18 14:51:06",
+    "resistance": 42000,
+    "support": 40000,
+    "month": "2026-07",
+    "updated": "2026-07-16 13:24:53",
     "note": "以近月合約成交量最大履約價代替 OI"
   }
 }

@@ -30,12 +30,18 @@
   "asia_indices": {
     "^N225": {
       "name": "日經 225",
-      "close": 68751.51,
-      "change": 1008.01,
-      "change_pct": 1.49
+      "close": 64141.12,
+      "change": -2694.42,
+      "change_pct": -4.03
+    },
+    "^KS11": {
+      "name": "韓國綜合",
+      "close": 6820.6,
+      "change": -463.81,
+      "change_pct": -6.37
     }
   },
-  "asia_updated": "2026-07-17 00:10:47",
+  "asia_updated": "2026-07-21 00:10:43",
   "institutional": {
     "foreign": {
       "stock_net_yi": -60.8,

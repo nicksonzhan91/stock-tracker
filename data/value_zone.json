@@ -1,86 +1,86 @@
 {
-  "date": "2026-07-20",
+  "date": "2026-07-21",
   "total": 45,
   "stocks": [
     {
       "stock_id": "6781",
       "name": "AES-KY",
-      "price": 926.0,
+      "price": 969.0,
       "buy_target": 3769.73,
       "value": 4523.68,
-      "ratio": 388.52,
+      "ratio": 366.84,
       "avg_roe": 22.92
     },
     {
       "stock_id": "8454",
       "name": "富邦媒",
-      "price": 253.5,
+      "price": 250.0,
       "buy_target": 764.78,
       "value": 917.74,
-      "ratio": 262.03,
+      "ratio": 267.1,
       "avg_roe": 35.7
     },
     {
       "stock_id": "9910",
       "name": "豐泰",
-      "price": 68.2,
+      "price": 68.1,
       "buy_target": 187.73,
       "value": 225.27,
-      "ratio": 230.31,
+      "ratio": 230.79,
       "avg_roe": 26.3
     },
     {
       "stock_id": "1707",
       "name": "葡萄王",
-      "price": 92.7,
+      "price": 91.4,
       "buy_target": 185.66,
       "value": 222.79,
-      "ratio": 140.33,
+      "ratio": 143.75,
       "avg_roe": 18.85
     },
     {
       "stock_id": "6409",
       "name": "旭隼",
-      "price": 988.0,
+      "price": 989.0,
       "buy_target": 1907.97,
       "value": 2289.56,
-      "ratio": 131.74,
+      "ratio": 131.5,
       "avg_roe": 46.26
     },
     {
       "stock_id": "6670",
       "name": "復盛應用",
-      "price": 260.0,
+      "price": 261.0,
       "buy_target": 478.74,
       "value": 574.49,
-      "ratio": 120.96,
+      "ratio": 120.11,
       "avg_roe": 29.6
     },
     {
       "stock_id": "1476",
       "name": "儒鴻",
-      "price": 336.5,
+      "price": 343.5,
       "buy_target": 538.44,
       "value": 646.13,
-      "ratio": 92.01,
+      "ratio": 88.1,
       "avg_roe": 23.68
     },
     {
       "stock_id": "6146",
       "name": "耕興",
-      "price": 189.0,
+      "price": 193.0,
       "buy_target": 279.47,
       "value": 335.36,
-      "ratio": 77.44,
+      "ratio": 73.76,
       "avg_roe": 25.32
     },
     {
       "stock_id": "3034",
       "name": "聯詠",
-      "price": 458.0,
+      "price": 476.0,
       "buy_target": 674.86,
       "value": 809.83,
-      "ratio": 76.82,
+      "ratio": 70.13,
       "avg_roe": 40.17
     },
     {
@@ -95,110 +95,101 @@
     {
       "stock_id": "8464",
       "name": "億豐",
-      "price": 360.0,
+      "price": 363.0,
       "buy_target": 477.59,
       "value": 573.11,
-      "ratio": 59.2,
+      "ratio": 57.88,
       "avg_roe": 27.81
     },
     {
       "stock_id": "2707",
       "name": "晶華",
-      "price": 179.5,
+      "price": 180.5,
       "buy_target": 236.34,
       "value": 283.61,
-      "ratio": 58.0,
+      "ratio": 57.12,
       "avg_roe": 32.38
     },
     {
       "stock_id": "3529",
       "name": "力旺",
-      "price": 2300.0,
+      "price": 2365.0,
       "buy_target": 2862.19,
       "value": 3434.63,
-      "ratio": 49.33,
+      "ratio": 45.23,
       "avg_roe": 51.88
-    },
-    {
-      "stock_id": "1477",
-      "name": "聚陽",
-      "price": 216.0,
-      "buy_target": 245.87,
-      "value": 295.04,
-      "ratio": 36.59,
-      "avg_roe": 24.97
     },
     {
       "stock_id": "5903",
       "name": "全家",
-      "price": 188.5,
+      "price": 189.0,
       "buy_target": 214.24,
       "value": 257.09,
-      "ratio": 36.39,
+      "ratio": 36.03,
       "avg_roe": 24.28
+    },
+    {
+      "stock_id": "1477",
+      "name": "聚陽",
+      "price": 218.0,
+      "buy_target": 245.87,
+      "value": 295.04,
+      "ratio": 35.34,
+      "avg_roe": 24.97
     },
     {
       "stock_id": "6803",
       "name": "崑鼎",
-      "price": 268.0,
+      "price": 271.5,
       "buy_target": 298.72,
       "value": 358.46,
-      "ratio": 33.75,
+      "ratio": 32.03,
       "avg_roe": 20.06
-    },
-    {
-      "stock_id": "6669",
-      "name": "緯穎",
-      "price": 4685.0,
-      "buy_target": 5108.02,
-      "value": 6129.62,
-      "ratio": 30.84,
-      "avg_roe": 37.77
     },
     {
       "stock_id": "6561",
       "name": "是方",
-      "price": 316.0,
+      "price": 325.0,
       "buy_target": 342.12,
       "value": 410.55,
-      "ratio": 29.92,
+      "ratio": 26.32,
       "avg_roe": 27.3
-    },
-    {
-      "stock_id": "6121",
-      "name": "新普",
-      "price": 362.5,
-      "buy_target": 383.61,
-      "value": 460.33,
-      "ratio": 26.99,
-      "avg_roe": 18.6
-    },
-    {
-      "stock_id": "1590",
-      "name": "亞德客-KY",
-      "price": 1335.0,
-      "buy_target": 1411.99,
-      "value": 1694.39,
-      "ratio": 26.92,
-      "avg_roe": 17.85
     },
     {
       "stock_id": "2912",
       "name": "統一超",
-      "price": 243.5,
+      "price": 243.0,
       "buy_target": 252.51,
       "value": 303.01,
-      "ratio": 24.44,
+      "ratio": 24.7,
       "avg_roe": 25.57
     },
     {
-      "stock_id": "3324",
-      "name": "雙鴻",
-      "price": 858.0,
-      "buy_target": 860.57,
-      "value": 1032.68,
-      "ratio": 20.36,
-      "avg_roe": 23.53
+      "stock_id": "1590",
+      "name": "亞德客-KY",
+      "price": 1360.0,
+      "buy_target": 1411.99,
+      "value": 1694.39,
+      "ratio": 24.59,
+      "avg_roe": 17.85
+    },
+    {
+      "stock_id": "6121",
+      "name": "新普",
+      "price": 370.5,
+      "buy_target": 383.61,
+      "value": 460.33,
+      "ratio": 24.25,
+      "avg_roe": 18.6
+    },
+    {
+      "stock_id": "6669",
+      "name": "緯穎",
+      "price": 5000.0,
+      "buy_target": 5108.02,
+      "value": 6129.62,
+      "ratio": 22.59,
+      "avg_roe": 37.77
     }
   ]
 }

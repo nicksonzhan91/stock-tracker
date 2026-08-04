@@ -1,68 +1,68 @@
 {
-  "date": "2026-08-03",
+  "date": "2026-08-04",
   "total": 45,
   "stocks": [
     {
       "stock_id": "6781",
       "name": "AES-KY",
-      "price": 964.0,
+      "price": 1010.0,
       "buy_target": 3769.73,
       "value": 4523.68,
-      "ratio": 369.26,
+      "ratio": 347.89,
       "avg_roe": 22.92
     },
     {
       "stock_id": "8454",
       "name": "富邦媒",
-      "price": 247.5,
+      "price": 253.5,
       "buy_target": 764.78,
       "value": 917.74,
-      "ratio": 270.8,
+      "ratio": 262.03,
       "avg_roe": 35.7
     },
     {
       "stock_id": "9910",
       "name": "豐泰",
-      "price": 67.2,
+      "price": 67.4,
       "buy_target": 187.73,
       "value": 225.27,
-      "ratio": 235.22,
+      "ratio": 234.23,
       "avg_roe": 26.3
     },
     {
       "stock_id": "1707",
       "name": "葡萄王",
-      "price": 90.5,
+      "price": 89.6,
       "buy_target": 185.66,
       "value": 222.79,
-      "ratio": 146.18,
+      "ratio": 148.65,
       "avg_roe": 18.85
     },
     {
       "stock_id": "6409",
       "name": "旭隼",
-      "price": 934.0,
+      "price": 941.0,
       "buy_target": 1907.97,
       "value": 2289.56,
-      "ratio": 145.13,
+      "ratio": 143.31,
       "avg_roe": 46.26
     },
     {
       "stock_id": "6670",
       "name": "復盛應用",
-      "price": 259.5,
+      "price": 258.0,
       "buy_target": 478.74,
       "value": 574.49,
-      "ratio": 121.38,
+      "ratio": 122.67,
       "avg_roe": 29.6
     },
     {
       "stock_id": "1476",
       "name": "儒鴻",
-      "price": 346.5,
+      "price": 354.5,
       "buy_target": 538.44,
       "value": 646.13,
-      "ratio": 86.47,
+      "ratio": 82.27,
       "avg_roe": 23.68
     },
     {
@@ -77,55 +77,46 @@
     {
       "stock_id": "5287",
       "name": "數字",
-      "price": 145.0,
+      "price": 145.5,
       "buy_target": 200.22,
       "value": 240.26,
-      "ratio": 65.7,
+      "ratio": 65.13,
       "avg_roe": 34.02
     },
     {
       "stock_id": "2707",
       "name": "晶華",
-      "price": 179.0,
+      "price": 176.0,
       "buy_target": 236.34,
       "value": 283.61,
-      "ratio": 58.44,
+      "ratio": 61.14,
       "avg_roe": 32.38
     },
     {
       "stock_id": "3034",
       "name": "聯詠",
-      "price": 519.0,
+      "price": 524.0,
       "buy_target": 674.86,
       "value": 809.83,
-      "ratio": 56.04,
+      "ratio": 54.55,
       "avg_roe": 40.17
     },
     {
       "stock_id": "8464",
       "name": "億豐",
-      "price": 376.0,
+      "price": 375.5,
       "buy_target": 477.59,
       "value": 573.11,
-      "ratio": 52.42,
+      "ratio": 52.63,
       "avg_roe": 27.81
-    },
-    {
-      "stock_id": "3529",
-      "name": "力旺",
-      "price": 2390.0,
-      "buy_target": 2862.19,
-      "value": 3434.63,
-      "ratio": 43.71,
-      "avg_roe": 51.88
     },
     {
       "stock_id": "2912",
       "name": "統一超",
-      "price": 220.5,
+      "price": 221.5,
       "buy_target": 252.51,
       "value": 303.01,
-      "ratio": 37.42,
+      "ratio": 36.8,
       "avg_roe": 25.57
     },
     {
@@ -138,21 +129,30 @@
       "avg_roe": 24.28
     },
     {
+      "stock_id": "3529",
+      "name": "力旺",
+      "price": 2575.0,
+      "buy_target": 2862.19,
+      "value": 3434.63,
+      "ratio": 33.38,
+      "avg_roe": 51.88
+    },
+    {
       "stock_id": "1477",
       "name": "聚陽",
-      "price": 218.5,
+      "price": 222.0,
       "buy_target": 245.87,
       "value": 295.04,
-      "ratio": 35.03,
+      "ratio": 32.9,
       "avg_roe": 24.97
     },
     {
       "stock_id": "6803",
       "name": "崑鼎",
-      "price": 270.5,
+      "price": 271.5,
       "buy_target": 298.72,
       "value": 358.46,
-      "ratio": 32.52,
+      "ratio": 32.03,
       "avg_roe": 20.06
     },
     {
@@ -167,10 +167,10 @@
     {
       "stock_id": "6121",
       "name": "新普",
-      "price": 362.5,
+      "price": 370.0,
       "buy_target": 383.61,
       "value": 460.33,
-      "ratio": 26.99,
+      "ratio": 24.41,
       "avg_roe": 18.6
     },
     {

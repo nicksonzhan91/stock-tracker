@@ -50,17 +50,17 @@
       "options_sign": "negative"
     },
     "trust": {
-      "stock_net_yi": -25.6,
+      "stock_net_yi": -12.0,
       "futures_net_lot": -1086,
       "futures_oi_lot": 83077,
       "options_sign": "negative"
     }
   },
-  "institutional_updated": "2026-08-07 10:54:58",
+  "institutional_updated": "2026-08-08 10:36:18",
   "taiex": {
     "close": 44225.91,
     "volume_yi": 8508,
-    "txf_vol_wan": 5.42,
+    "txf_vol_wan": 4.88,
     "ema11": 43561,
     "ema24": 43822,
     "sma60": 44259
@@ -192,7 +192,7 @@
       }
     ]
   },
-  "indicators_updated": "2026-08-07 10:55:04",
+  "indicators_updated": "2026-08-08 10:36:24",
   "options_strikes": {
     "resistance": 42000,
     "support": 40000,

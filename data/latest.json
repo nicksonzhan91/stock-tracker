@@ -44,38 +44,32 @@
   "asia_updated": "2026-08-10 00:10:42",
   "institutional": {
     "foreign": {
-      "stock_net_yi": -407.2,
-      "futures_net_lot": 1449,
-      "futures_oi_lot": -87911,
+      "stock_net_yi": 517.1,
+      "futures_net_lot": -1306,
+      "futures_oi_lot": -89201,
       "options_sign": "negative"
     },
     "trust": {
-      "stock_net_yi": -12.0,
-      "futures_net_lot": -1086,
-      "futures_oi_lot": 83077,
+      "stock_net_yi": 29.8,
+      "futures_net_lot": 674,
+      "futures_oi_lot": 83751,
       "options_sign": "negative"
     }
   },
-  "institutional_updated": "2026-08-08 10:36:18",
+  "institutional_updated": "2026-08-10 11:10:52",
   "taiex": {
-    "close": 44225.91,
-    "volume_yi": 8508,
-    "txf_vol_wan": 4.88,
-    "ema11": 43561,
-    "ema24": 43822,
-    "sma60": 44259
+    "close": 44928.76,
+    "volume_yi": 8804,
+    "txf_vol_wan": 4.9,
+    "ema11": 43789,
+    "ema24": 43911,
+    "sma60": 44311
   },
   "pc_ratio": {
-    "current": 106.42,
-    "ma3": 109.35,
-    "ma10": 99.85,
+    "current": 117.38,
+    "ma3": 111.19,
+    "ma10": 100.6,
     "chart": [
-      {
-        "date": "2026-07-13",
-        "current": 124.42,
-        "ma3": 124.35,
-        "ma10": 125.16
-      },
       {
         "date": "2026-07-14",
         "current": 99.31,
@@ -189,10 +183,16 @@
         "current": 106.42,
         "ma3": 109.35,
         "ma10": 99.85
+      },
+      {
+        "date": "2026-08-10",
+        "current": 117.38,
+        "ma3": 111.19,
+        "ma10": 100.6
       }
     ]
   },
-  "indicators_updated": "2026-08-08 10:36:24",
+  "indicators_updated": "2026-08-10 11:10:58",
   "options_strikes": {
     "resistance": 42000,
     "support": 40000,

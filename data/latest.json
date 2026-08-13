@@ -36,12 +36,12 @@
     },
     "^KS11": {
       "name": "韓國綜合",
-      "close": 6299.66,
-      "change": 40.89,
-      "change_pct": 0.65
+      "close": 6345.53,
+      "change": 45.87,
+      "change_pct": 0.73
     }
   },
-  "asia_updated": "2026-08-12 00:10:40",
+  "asia_updated": "2026-08-13 00:10:40",
   "institutional": {
     "foreign": {
       "stock_net_yi": 110.2,

@@ -196,8 +196,8 @@
   "options_strikes": {
     "resistance": 42000,
     "support": 40000,
-    "month": "2026-07",
-    "updated": "2026-07-16 13:24:53",
+    "month": "2026-08",
+    "updated": "2026-08-20 12:30:35",
     "note": "以近月合約成交量最大履約價代替 OI"
   }
 }

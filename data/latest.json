@@ -1,32 +1,32 @@
 {
-  "date": "2026-08-20",
+  "date": "2026-08-21",
   "us_indices": {
     "^DJI": {
       "name": "道瓊工業",
-      "close": 52759.21,
-      "change": -703.84,
-      "change_pct": -1.32
+      "close": 53277.01,
+      "change": 517.8,
+      "change_pct": 0.98
     },
     "^GSPC": {
       "name": "S&P 500",
-      "close": 7641.16,
-      "change": -66.82,
-      "change_pct": -0.87
+      "close": 7674.37,
+      "change": 33.21,
+      "change_pct": 0.43
     },
     "^IXIC": {
       "name": "那斯達克",
-      "close": 26067.17,
-      "change": -263.92,
-      "change_pct": -1.0
+      "close": 26180.46,
+      "change": 113.29,
+      "change_pct": 0.43
     },
     "^SOX": {
       "name": "費城半導體",
-      "close": 11800.02,
-      "change": 61.79,
-      "change_pct": 0.53
+      "close": 11740.37,
+      "change": -59.65,
+      "change_pct": -0.51
     }
   },
-  "us_updated": "2026-08-20 22:26:22",
+  "us_updated": "2026-08-21 22:23:45",
   "asia_indices": {
     "^N225": {
       "name": "日經 225",

@@ -56,11 +56,11 @@
       "options_sign": "negative"
     }
   },
-  "institutional_updated": "2026-08-28 21:08:25",
+  "institutional_updated": "2026-08-29 14:57:55",
   "taiex": {
     "close": 46331.45,
     "volume_yi": 10690,
-    "txf_vol_wan": 3.35,
+    "txf_vol_wan": 4.02,
     "ema11": 45451,
     "ema24": 45013,
     "sma60": 44946
@@ -192,7 +192,7 @@
       }
     ]
   },
-  "indicators_updated": "2026-08-28 21:08:32",
+  "indicators_updated": "2026-08-29 14:58:01",
   "options_strikes": {
     "resistance": 42000,
     "support": 40000,

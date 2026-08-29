@@ -3,8 +3,8 @@
   "us_indices": {
     "^DJI": {
       "name": "道瓊工業",
-      "close": 53560.0,
-      "change": -9.44,
+      "close": 53559.99,
+      "change": -9.45,
       "change_pct": -0.02
     },
     "^GSPC": {
@@ -26,7 +26,7 @@
       "change_pct": -3.47
     }
   },
-  "us_updated": "2026-08-29 03:31:29",
+  "us_updated": "2026-08-29 23:54:18",
   "asia_indices": {
     "^N225": {
       "name": "日經 225",

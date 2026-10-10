@@ -50,7 +50,7 @@
       "options_sign": "negative"
     }
   },
-  "institutional_updated": "2026-10-09 16:52:01",
+  "institutional_updated": "2026-10-10 15:46:38",
   "taiex": {
     "close": 49313.44,
     "volume_yi": 9245,
@@ -186,7 +186,7 @@
       }
     ]
   },
-  "indicators_updated": "2026-10-09 16:52:05",
+  "indicators_updated": "2026-10-10 15:46:46",
   "options_strikes": {
     "resistance": 50000,
     "support": 40000,

@@ -56,26 +56,20 @@
       "options_sign": "negative"
     }
   },
-  "institutional_updated": "2026-10-31 15:38:02",
+  "institutional_updated": "2026-11-02 20:03:27",
   "taiex": {
-    "close": 45211.83,
-    "volume_yi": 9396,
+    "close": 44920.14,
+    "volume_yi": 7997,
     "txf_vol_wan": 4.87,
-    "ema11": 46734,
-    "ema24": 47121,
-    "sma60": 46477
+    "ema11": 46432,
+    "ema24": 46945,
+    "sma60": 46507
   },
   "pc_ratio": {
-    "current": 62.59,
-    "ma3": 65.48,
-    "ma10": 64.36,
+    "current": 61.58,
+    "ma3": 62.88,
+    "ma10": 64.44,
     "chart": [
-      {
-        "date": "2026-09-30",
-        "current": 80.57,
-        "ma3": 80.4,
-        "ma10": 82.68
-      },
       {
         "date": "2026-10-01",
         "current": 82.54,
@@ -189,10 +183,16 @@
         "current": 62.59,
         "ma3": 65.48,
         "ma10": 64.36
+      },
+      {
+        "date": "2026-11-02",
+        "current": 61.58,
+        "ma3": 62.88,
+        "ma10": 64.44
       }
     ]
   },
-  "indicators_updated": "2026-10-31 15:38:08",
+  "indicators_updated": "2026-11-02 20:03:33",
   "options_strikes": {
     "resistance": 50000,
     "support": 47000,
